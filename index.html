@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Audio demonstrations for LiveSynth, a playable generative neural synthesizer with flexible timbre control.">
+  <title>LiveSynth — Audio Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="LiveSynth home">
+      <span class="wordmark-mark" aria-hidden="true"></span>
+      LiveSynth
+    </a>
+    <nav class="header-links" aria-label="Primary navigation">
+      <a href="#samples">Audio samples</a>
+      <a href="#realtime">Real-time inference</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title">LiveSynth</h1>
+        <p class="paper-title">Playable Generative Neural Synthesis with Flexible Timbre Control</p>
+        <p class="authors">Kyungsu Kim, Yejin Kim, and Kyogu Lee</p>
+        <p class="affiliation">Music and Audio Research Group, Seoul National University</p>
+        <p class="hero-summary">LiveSynth generates audio from incoming MIDI events with timbre specified by a reference recording or text prompt. It operates causally at a 100-Hz frame rate and supports timbre morphing and autonomous continuation.</p>
+        <div class="hero-actions">
+          <a href="#samples">Audio samples</a>
+        </div>
+      </div>
+    </section>
+
+    <nav class="task-nav" aria-label="Audio demonstration sections">
+      <div class="shell task-nav-inner">
+        <a href="#cloning">Instrument cloning</a>
+        <a href="#text-to-instrument">Text-to-Instrument</a>
+        <a href="#morphing">Timbre morphing</a>
+        <a href="#continuation">Performance continuation</a>
+      </div>
+    </nav>
+
+    <div id="samples">
+      <section class="demo-section shell" id="cloning" aria-labelledby="cloning-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="cloning-title">Zero-shot instrument cloning</h2>
+            <p>Each row uses the same MIDI excerpt. VAE reconstruction isolates the quality loss introduced by the causal audio representation.</p>
+          </div>
+          <button class="stop-all" type="button">Stop all audio</button>
+        </div>
+
+        <div class="comparison-table cloning-table" role="table" aria-label="Zero-shot instrument cloning samples">
+          <div class="comparison-head" role="row">
+            <span role="columnheader">Example</span>
+            <span role="columnheader">Reference</span>
+            <span role="columnheader">Ground truth</span>
+            <span role="columnheader" class="diagnostic-end">VAE recon.</span>
+            <span role="columnheader" class="ours-label">LiveSynth</span>
+            <span role="columnheader">TokenSynth</span>
+            <span role="columnheader">CTD</span>
+          </div>
+
+          <div class="comparison-row" role="row" data-player-group="clone-1">
+            <div class="sample-meta" role="rowheader"><strong>Example 1</strong></div>
+            <div role="cell" data-audio-slot="Warm reference" data-seed="11" data-profile="reference"></div>
+            <div role="cell" data-audio-slot="Target" data-seed="12" data-profile="clean"></div>
+            <div role="cell" class="diagnostic-end" data-audio-slot="VAE reconstruction" data-seed="16" data-profile="diffusion"></div>
+            <div role="cell" class="ours-cell" data-audio-slot="LiveSynth" data-seed="15" data-profile="live"></div>
+            <div role="cell" data-audio-slot="TokenSynth" data-seed="13" data-profile="token"></div>
+            <div role="cell" data-audio-slot="CTD" data-seed="14" data-profile="diffusion"></div>
+          </div>
+          <div class="comparison-row" role="row" data-player-group="clone-2">
+            <div class="sample-meta" role="rowheader"><strong>Example 2</strong></div>
+            <div role="cell" data-audio-slot="Dry reference" data-seed="21" data-profile="reference"></div>
+            <div role="cell" data-audio-slot="Target" data-seed="22" data-profile="clean"></div>
+            <div role="cell" class="diagnostic-end" data-audio-slot="VAE reconstruction" data-seed="26" data-profile="diffusion"></div>
+            <div role="cell" class="ours-cell" data-audio-slot="LiveSynth" data-seed="25" data-profile="live"></div>
+            <div role="cell" data-audio-slot="TokenSynth" data-seed="23" data-profile="token"></div>
+            <div role="cell" data-audio-slot="CTD" data-seed="24" data-profile="diffusion"></div>
+          </div>
+          <div class="comparison-row" role="row" data-player-group="clone-3">
+            <div class="sample-meta" role="rowheader"><strong>Example 3</strong></div>
+            <div role="cell" data-audio-slot="Breathy reference" data-seed="31" data-profile="reference"></div>
+            <div role="cell" data-audio-slot="Target" data-seed="32" data-profile="clean"></div>
+            <div role="cell" class="diagnostic-end" data-audio-slot="VAE reconstruction" data-seed="36" data-profile="diffusion"></div>
+            <div role="cell" class="ours-cell" data-audio-slot="LiveSynth" data-seed="35" data-profile="live"></div>
+            <div role="cell" data-audio-slot="TokenSynth" data-seed="33" data-profile="token"></div>
+            <div role="cell" data-audio-slot="CTD" data-seed="34" data-profile="diffusion"></div>
+          </div>
+          <div class="comparison-row" role="row" data-player-group="clone-4">
+            <div class="sample-meta" role="rowheader"><strong>Example 4</strong></div>
+            <div role="cell" data-audio-slot="Bright reference" data-seed="41" data-profile="reference"></div>
+            <div role="cell" data-audio-slot="Target" data-seed="42" data-profile="clean"></div>
+            <div role="cell" class="diagnostic-end" data-audio-slot="VAE reconstruction" data-seed="46" data-profile="diffusion"></div>
+            <div role="cell" class="ours-cell" data-audio-slot="LiveSynth" data-seed="45" data-profile="live"></div>
+            <div role="cell" data-audio-slot="TokenSynth" data-seed="43" data-profile="token"></div>
+            <div role="cell" data-audio-slot="CTD" data-seed="44" data-profile="diffusion"></div>
+          </div>
+          <div class="comparison-row" role="row" data-player-group="clone-5">
+            <div class="sample-meta" role="rowheader"><strong>Example 5</strong></div>
+            <div role="cell" data-audio-slot="Soft reference" data-seed="51" data-profile="reference"></div>
+            <div role="cell" data-audio-slot="Target" data-seed="52" data-profile="clean"></div>
+            <div role="cell" class="diagnostic-end" data-audio-slot="VAE reconstruction" data-seed="56" data-profile="diffusion"></div>
+            <div role="cell" class="ours-cell" data-audio-slot="LiveSynth" data-seed="55" data-profile="live"></div>
+            <div role="cell" data-audio-slot="TokenSynth" data-seed="53" data-profile="token"></div>
+            <div role="cell" data-audio-slot="CTD" data-seed="54" data-profile="diffusion"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-section shell" id="text-to-instrument" aria-labelledby="text-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="text-title">Text-to-Instrument</h2>
+            <p>A text prompt specifies the timbre while both models render the same MIDI excerpt. We show results using raw and Procrustes-aligned CLAP embeddings.</p>
+          </div>
+        </div>
+
+        <div class="text-samples">
+          <div class="text-head" aria-hidden="true">
+            <span>Prompt</span>
+            <span class="ours-label">LiveSynth<br><small>Raw</small></span>
+            <span class="ours-label">LiveSynth<br><small>Procrustes</small></span>
+            <span>TokenSynth<br><small>Raw</small></span>
+            <span>TokenSynth<br><small>Procrustes</small></span>
+          </div>
+          <article class="text-sample" data-player-group="text-1">
+            <div class="prompt"><span>Prompt</span><h3>“the sound of a acoustic flute”</h3><div class="mini-midi" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="ours-cell" data-condition="LiveSynth · Raw" data-audio-slot="LiveSynth · Raw" data-seed="63" data-profile="live"></div>
+            <div class="ours-cell" data-condition="LiveSynth · Procrustes" data-audio-slot="LiveSynth · Procrustes" data-seed="64" data-profile="live"></div>
+            <div data-condition="TokenSynth · Raw" data-audio-slot="TokenSynth · Raw" data-seed="61" data-profile="token"></div>
+            <div data-condition="TokenSynth · Procrustes" data-audio-slot="TokenSynth · Procrustes" data-seed="62" data-profile="token"></div>
+          </article>
+          <article class="text-sample" data-player-group="text-2">
+            <div class="prompt"><span>Prompt</span><h3>“the sound of a acoustic mallet”</h3><div class="mini-midi" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="ours-cell" data-condition="LiveSynth · Raw" data-audio-slot="LiveSynth · Raw" data-seed="73" data-profile="live"></div>
+            <div class="ours-cell" data-condition="LiveSynth · Procrustes" data-audio-slot="LiveSynth · Procrustes" data-seed="74" data-profile="live"></div>
+            <div data-condition="TokenSynth · Raw" data-audio-slot="TokenSynth · Raw" data-seed="71" data-profile="token"></div>
+            <div data-condition="TokenSynth · Procrustes" data-audio-slot="TokenSynth · Procrustes" data-seed="72" data-profile="token"></div>
+          </article>
+          <article class="text-sample" data-player-group="text-3">
+            <div class="prompt"><span>Prompt</span><h3>“the sound of a acoustic string”</h3><div class="mini-midi" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="ours-cell" data-condition="LiveSynth · Raw" data-audio-slot="LiveSynth · Raw" data-seed="83" data-profile="live"></div>
+            <div class="ours-cell" data-condition="LiveSynth · Procrustes" data-audio-slot="LiveSynth · Procrustes" data-seed="84" data-profile="live"></div>
+            <div data-condition="TokenSynth · Raw" data-audio-slot="TokenSynth · Raw" data-seed="81" data-profile="token"></div>
+            <div data-condition="TokenSynth · Procrustes" data-audio-slot="TokenSynth · Procrustes" data-seed="82" data-profile="token"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="demo-section morph-section shell" id="morphing" aria-labelledby="morph-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="morph-title">Timbre morphing</h2>
+            <p>The MIDI events remain unchanged while the timbre condition moves continuously between two reference recordings.</p>
+          </div>
+        </div>
+
+        <div class="morph-list">
+          <article class="morph-row" data-player-group="morph-1">
+            <div class="endpoint endpoint-a" data-audio-slot="Reference A" data-seed="111" data-profile="reference"><span class="morph-example">Example 1</span></div>
+            <div class="morph-output" data-audio-slot="Morph A to B" data-seed="113" data-profile="morph"><div class="morph-axis"><span>Reference A</span><i></i><span>Reference B</span></div></div>
+            <div class="endpoint endpoint-b" data-audio-slot="Reference B" data-seed="112" data-profile="reference"></div>
+          </article>
+          <article class="morph-row" data-player-group="morph-2">
+            <div class="endpoint endpoint-a" data-audio-slot="Reference A" data-seed="121" data-profile="reference"><span class="morph-example">Example 2</span></div>
+            <div class="morph-output" data-audio-slot="Morph A to B" data-seed="123" data-profile="morph"><div class="morph-axis"><span>Reference A</span><i></i><span>Reference B</span></div></div>
+            <div class="endpoint endpoint-b" data-audio-slot="Reference B" data-seed="122" data-profile="reference"></div>
+          </article>
+          <article class="morph-row" data-player-group="morph-3">
+            <div class="endpoint endpoint-a" data-audio-slot="Reference A" data-seed="131" data-profile="reference"><span class="morph-example">Example 3</span></div>
+            <div class="morph-output" data-audio-slot="Morph A to B" data-seed="133" data-profile="morph"><div class="morph-axis"><span>Reference A</span><i></i><span>Reference B</span></div></div>
+            <div class="endpoint endpoint-b" data-audio-slot="Reference B" data-seed="132" data-profile="reference"></div>
+          </article>
+          <article class="morph-row" data-player-group="morph-4">
+            <div class="endpoint endpoint-a" data-audio-slot="Reference A" data-seed="141" data-profile="reference"><span class="morph-example">Example 4</span></div>
+            <div class="morph-output" data-audio-slot="Morph A to B" data-seed="143" data-profile="morph"><div class="morph-axis"><span>Reference A</span><i></i><span>Reference B</span></div></div>
+            <div class="endpoint endpoint-b" data-audio-slot="Reference B" data-seed="142" data-profile="reference"></div>
+          </article>
+          <article class="morph-row" data-player-group="morph-5">
+            <div class="endpoint endpoint-a" data-audio-slot="Reference A" data-seed="151" data-profile="reference"><span class="morph-example">Example 5</span></div>
+            <div class="morph-output" data-audio-slot="Morph A to B" data-seed="153" data-profile="morph"><div class="morph-axis"><span>Reference A</span><i></i><span>Reference B</span></div></div>
+            <div class="endpoint endpoint-b" data-audio-slot="Reference B" data-seed="152" data-profile="reference"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="demo-section shell" id="continuation" aria-labelledby="continuation-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="continuation-title">Autonomous performance continuation</h2>
+            <p>After a 5-second MIDI-conditioned prefix, LiveSynth continues from its causal context with the absent MIDI condition.</p>
+          </div>
+        </div>
+
+        <div class="continuation-list">
+          <article class="continuation-row" data-player-group="continue-1">
+            <div class="sample-meta"><strong>Example 1</strong><span>10-s excerpt</span></div>
+            <div class="continuation-player ours-cell" data-audio-slot="Prefix + LiveSynth continuation" data-seed="161" data-profile="continuation"><div class="continuation-phase-bar"><span>MIDI condition <small>0–5 s</small></span><span>Autonomous continuation <small>5–10 s</small></span><i aria-hidden="true"></i></div></div>
+          </article>
+          <article class="continuation-row" data-player-group="continue-2">
+            <div class="sample-meta"><strong>Example 2</strong><span>10-s excerpt</span></div>
+            <div class="continuation-player ours-cell" data-audio-slot="Prefix + LiveSynth continuation" data-seed="171" data-profile="continuation"><div class="continuation-phase-bar"><span>MIDI condition <small>0–5 s</small></span><span>Autonomous continuation <small>5–10 s</small></span><i aria-hidden="true"></i></div></div>
+          </article>
+          <article class="continuation-row" data-player-group="continue-3">
+            <div class="sample-meta"><strong>Example 3</strong><span>10-s excerpt</span></div>
+            <div class="continuation-player ours-cell" data-audio-slot="Prefix + LiveSynth continuation" data-seed="181" data-profile="continuation"><div class="continuation-phase-bar"><span>MIDI condition <small>0–5 s</small></span><span>Autonomous continuation <small>5–10 s</small></span><i aria-hidden="true"></i></div></div>
+          </article>
+          <article class="continuation-row" data-player-group="continue-4">
+            <div class="sample-meta"><strong>Example 4</strong><span>10-s excerpt</span></div>
+            <div class="continuation-player ours-cell" data-audio-slot="Prefix + LiveSynth continuation" data-seed="191" data-profile="continuation"><div class="continuation-phase-bar"><span>MIDI condition <small>0–5 s</small></span><span>Autonomous continuation <small>5–10 s</small></span><i aria-hidden="true"></i></div></div>
+          </article>
+          <article class="continuation-row" data-player-group="continue-5">
+            <div class="sample-meta"><strong>Example 5</strong><span>10-s excerpt</span></div>
+            <div class="continuation-player ours-cell" data-audio-slot="Prefix + LiveSynth continuation" data-seed="201" data-profile="continuation"><div class="continuation-phase-bar"><span>MIDI condition <small>0–5 s</small></span><span>Autonomous continuation <small>5–10 s</small></span><i aria-hidden="true"></i></div></div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <section class="realtime" id="realtime" aria-labelledby="realtime-title">
+      <div class="shell realtime-inner">
+        <div>
+          <h2 id="realtime-title">Real-time inference</h2>
+          <p>Measured over 6,000 frames on a fanless M3 MacBook Air using the MLX int8 inference path.</p>
+        </div>
+        <dl>
+          <div><dt>Mean per frame</dt><dd>8.78 ms</dd></div>
+          <div><dt>99th percentile</dt><dd>9.77 ms</dd></div>
+          <div><dt>Generated frame</dt><dd>480 samples</dd></div>
+          <div><dt>Real-time factor</dt><dd>0.88</dd></div>
+        </dl>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer shell">
+    <span>LiveSynth audio demonstrations</span>
+    <a href="#top">Back to top</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
